@@ -3,12 +3,11 @@ import React from 'react';
 interface CardProps {
   title: string;
   image: string;
-  description: string;
   contractAddress: string;
   tokenId: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, image, description, contractAddress, tokenId }) => {
+const Card: React.FC<CardProps> = ({ title, image, contractAddress, tokenId }) => {
   return (
     <div className="border rounded-lg shadow-md p-4 bg-white dark:bg-gray-800">
       {image ? (
@@ -23,7 +22,7 @@ const Card: React.FC<CardProps> = ({ title, image, description, contractAddress,
         </div>
       )}
       <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-100">{title}</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{description}</p>
+      {/* <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{description}</p> */}
       <p className="text-xs text-gray-500 dark:text-gray-400">Contract: {contractAddress}</p>
       <p className="text-xs text-gray-500 dark:text-gray-400">Token ID: {tokenId}</p>
     </div>

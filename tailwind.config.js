@@ -1,14 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  content: [
+    './src/app/**/*.{js,ts,jsx,tsx}', // Include Next.js app directory
+    './src/components/**/*.{js,ts,jsx,tsx}', // Include components directory
+    './src/**/*.{js,ts,jsx,tsx}', // Include everything in `src`
+  ],
   theme: {
-    extend: {
-      colors: {
-        dark: '#181818',
-        light: '#f8f8f8',
-        textDark: 'rgba(255, 255, 255, 0.87)',
-        textLight: '#181818',
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };
