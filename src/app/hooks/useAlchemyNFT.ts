@@ -8,7 +8,22 @@ interface NFT {
   tokenId: string;
 }
 
-export const useAlchemyNFT = (address: string) => {
+interface AlchemyResponse {
+  ownedNfts: Array<{
+    name?: string;
+    image?: {
+      cachedUrl?: string;
+      thumbnailUrl?: string;
+      originalUrl?: string;
+    };
+    tokenId: string;
+    contract: {
+      address: string;
+    };
+  }>;
+}
+
+export const useAlchemyNFT = (address: `0x${string}` | '') => {
   const [nfts, setNfts] = useState<NFT[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,19 +36,21 @@ export const useAlchemyNFT = (address: string) => {
       setError(null);
 
       try {
-        const response = await alchemy.nft.getNftsForOwner(address);
-        console.log('nft fetcher', response);
-        const formattedNFTs = response.ownedNfts.map((nft) => ({
+        const response: AlchemyResponse = await alchemy.nft.getNftsForOwner(
+          address
+        );
+
+        const formattedNFTs: NFT[] = response.ownedNfts.map((nft) => ({
           title: nft.name || `Token ID: ${nft.tokenId}`,
           image:
-          nft.image?.cachedUrl || // Prefer cached URL
-          nft.image?.thumbnailUrl || // Fallback to thumbnail
-          nft.image?.originalUrl ||
+            nft.image?.cachedUrl || 
+            nft.image?.thumbnailUrl ||
+            nft.image?.originalUrl ||
             '',
-          contractAddress: nft.contract.address || '',
-          tokenId: nft.tokenId || '',
+          contractAddress: nft.contract.address,
+          tokenId: nft.tokenId,
         }));
-        console.log('formattedNFTs', formattedNFTs);
+
         setNfts(formattedNFTs);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch NFTs.');
