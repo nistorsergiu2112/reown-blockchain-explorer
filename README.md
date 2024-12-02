@@ -77,6 +77,10 @@ A lightweight, feature-rich Ethereum NFT and balance explorer. This application 
    Create a `.env` file in the root directory and add:  
    `NEXT_PUBLIC_ALCHEMY_API_KEY=your-api-key`
 
+3. **Set Up Wagmi Project Id**  
+   Create a `.env` file in the root directory and add:  
+   `NEXT_PUBLIC_WC_PROJECT_ID=your-api-key`
+
 4. **Run the Application**  
    - For development: `npm run dev`  
    - For production:  
